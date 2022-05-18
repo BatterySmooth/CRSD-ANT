@@ -3,25 +3,18 @@
 <head>
 	<title>ANT</title>
 	<link rel="icon" href="images/Icon.png">
-	<link rel="stylesheet" href="css/ANT-style.css" type="text/css" />
-	<script src="js/ANTonLoad.js" type="text/javascript"></script>
-	<script src="js/ANTtimer.js" type="text/javascript"></script>
-	<script src="js/ANTnavigation.js" type="text/javascript"></script>
-	<script src="js/ANTtimer.js" type="text/javascript"></script>
-	<script src="js/ANTexport.js" type="text/javascript"></script>
-	<script src="js/ANTrandom.js" type="text/javascript"></script>
-	<script src="js/ANTanalyzeResults.js" type="text/javascript"></script>
-	<script src="js/ANTtrial.js" type="text/javascript"></script>
-	<script src="js/ANTstatistics.js" type="text/javascript"></script>
-	<script src="js/ANTdates.js" type="text/javascript"></script>
-	<script src="js/ANTdisplay.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="css/Switch-style.css" type="text/css" />
+
 	<script src="js/urlpopulate.js" type="text/javascript"></script>
+
+	<script src="js/SwitchOnLoad.js" type="text/javascript"></script>
+	<script src="js/SwitchBrowserCheck.js" type="text/javascript"></script>
 	
-	<script src="config/trialSet.js" type="text/javascript"></script>
+<!-- 	<script src="config/trialSet.js" type="text/javascript"></script>
 	<script src="config/targetTypes.js" type="text/javascript"></script>
-	<script src="config/dimensions.js" type="text/javascript"></script>
+	<script src="config/dimensions.js" type="text/javascript"></script> -->
 </head>
-<body onload="onLoad();">
+<body onload="OnLoad();" style="background-color: white; transition: background-color 3s linear; ">
 	<div id="content">
 		<div id="formInput" class="instructionsPage" > <!-- style="height:815px" -->
 			<center>
@@ -31,87 +24,13 @@
 				<h4>This testing utility is designed for use with Firefox.</h4>
 				<p id="browserWarning">Other browsers are UNSUPPORTED but may work.  Internet Explorer will yield INACCURATE results and is NOT recommended.</p>
 			</div>
-			<p>Please enter the following information:</p>
-			</center>
-			<form name="form" id="form">
-				<label>ID:</label>
-				<input type="text" name="ID" id="ID" required/>
-				<br />
-				<label>Session #:</label>
-				<input type="text" name="sessionNumber" id="sessionNumber" required/>
-				<br />
-				<label>Study ID:</label>
-				<input type="text" name="studyID" id="studyID" required/>
-				<br />
-				<label>Group ID:</label>
-				<input type="text" name="groupID" id="groupID" required/>
-				<br />
-				<label>Age:</label>
-				<input type="text" name="age" id="age" required/>
-				<br />
-				<table id=genderTable>
-					<tr>
-						<td>
-							<label>Gender:</label>
-						</td>
-						<td>
-							<input type="radio" name="gender" value="M" />Male
-						</td>
-					</tr>
-					<tr>
-						<td></td><td>
-							<input type="radio" name="gender" value="F" />Female
-						</td>
-					</tr>
-					<tr>
-						<td></td><td>
-							<input type="radio" name="gender" value="N" />Non-Binary
-						</td>
-					</tr>
-					<tr>
-						<td></td><td>
-							<input type="radio" name="gender" value="X" />Prefer not to say
-						</td>
-					</tr>
-				</table>
-				<label>Target Type:</label>
-				<select name="targetType" id="targetType" size="1">
-				</select>
-				<br />
-				<label>Monitor Diagonal:</label>
-				<select name="monitorSize" id="monitorSize">
-					<option value="7">7"</option>
-					<option value="8">8"</option>
-					<option value="9">9"</option>
-					<option value="10">10"</option>
-					<option value="11">11"</option>
-					<option value="12">12"</option>
-					<option value="13">13"</option>
-					<option value="14">14"</option>
-					<option value="15">15"</option>
-					<option value="16">16"</option>
-					<option value="17">17"</option>
-					<option value="18">18"</option>
-					<option value="19">19"</option>
-					<option value="20">20"</option>
-					<option value="21">21"</option>
-					<option value="22" selected>22"</option>
-					<option value="23">23"</option>
-					<option value="24">24"</option>
-					<option value="25">25"</option>
-					<option value="26">26"</option>
-					<option value="27">27"</option>
-					<option value="28">28"</option>
-					<option value="29">29"</option>
-					<option value="30">30"</option>
-				</select>
-				
-				<br />
-			</form>
-			<center>
+			<p>The next test is the Task Switching test.</p>
+			
+
+
+
 			<p id="fullscreenNote">For best experience, use fullscreen (<span class='fullscreenKey'>F11</span>)</p>
 			</center>
-			<button class="previousButton" onclick="window.location.reload();" Style="bottom:10px">Clear</button>
 			<button class="nextButton" onclick="submitForm();" Style="bottom:10px">Next</button>
 			<!-- <input id="nextButton" class="nextButton" type="button" name="next" value="Next" onclick="submitForm();" />	 This brokey -->
 		</div>
@@ -338,7 +257,7 @@
 				<h4>Click the link below to download the data export</h4>
                 <div id="dataDownload"></div>
 				<div id="dataDownloadLink"></div>
-				<input class="nextButton" type="button" name="next" value="Continue" onclick="window.location.href='switch.html'" />
+				
 			</center>
 		</div>
 	</div>
