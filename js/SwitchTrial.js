@@ -31,7 +31,7 @@ function SwitchTrialStage1() {                          // Show Cross
   SwitchTrialResponseTime = 0;                          // Reset Trial Response Time
 }
 
-function SwitchTrialStage2() {                          // Show Target
+function SwitchTrialStage2() {                          // Show Arrow
   SwitchTrialStage2Time = new Date().getTime();         // Set Stage 2 Time for output
   setTimeout(SwitchTrialStage3, 500);                   // Set Timout for progressing to the next stage
   document.onkeydown = SwitchTrialKeypress;             // Enable Keypress event
@@ -79,7 +79,6 @@ function SwitchTrialNext() {                            // Move to next trial
     SwitchTrialStage1();                                // Move back to Stage 1 if not
   } else {
     GenerateExportLink(SwitchTrialResults);             // Generate Export link for page
-    SwitchNextTrial();                                  // Continue to export page if so (SwitchNavigation.js)
   }
 }
 

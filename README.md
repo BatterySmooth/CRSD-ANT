@@ -4,6 +4,13 @@ This is a combination of the CRSD-ANT (produced by [Luke Docksteader](http://doc
 
 This software was produced for research conducted at the University of Bath.
 
+The documentation for the CRSD-ANT has been preserved below, with the only edits being to ensure compatability with the modified system (file names, etc...)
+
+Installation
+----------
+### Download the source files
+Click on the "Zip" link in the sidebar above or simply click [here.](https://github.com/docksteaderluke/CRSD-ANT/archive/master.zip)
+
 CRSD-ANT
 ======================
 Background
@@ -178,25 +185,44 @@ Switch Task
 ======================
 Background
 ----------
-The Switch task was created to follow the CRSD-ANT as part of a research project at the University of Bath. The Switch Task is decribed in X paper. The structure has been modified from the CRSD-ANT as described above in order to give the same user experience throughout the two trials and to provide the framework for the test.
+The Switch task was created to work with the CRSD-ANT as part of a research project at the University of Bath. The Switch Task is decribed in X paper. The structure has been modified from the CRSD-ANT as described above in order to give the same user experience throughout the two trials and to provide the framework for the test.
 
 License
 -------
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. To view a copy of this licence, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California 94105, USA.
 
-Any original or modified version of this software must attribute the original work to the following (original) author, and include a hyperlink (or at very least a URL reference) to their respective Web site or GitHub Profile:
+Any original or modified version of this software must attribute the original work to the following (original) author & ANT framework authors, and include a hyperlink (or at very least a URL reference) to their respective Web site or GitHub Profile:
 
-- Matt Booth - https://github.com/BatterySmooth
+- Matt Booth (Switch Task) - https://github.com/BatterySmooth
+- Luke Docksteader (ANT Framework) - http://docksteaderluke.com
+- Kris Scott (ANT Framework) - http://krssctt.com
 
 Trial Stages
 ----------
-The trial is broken up into stages.
+Within each response, the trial is broken up into 4 stages and an initiation stage:
+
+| Stage       | Actions                                                                                                                        |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------|
+| Trial Start | Set Trial Array, Generate Blanking interval for 1st trial, Call Stage 1                                                        |
+| Stage 1     | Reset Trial Response & Response time, Show the fixation cross                                                                  |
+| Stage 2     | Set timeout for Stage 2, Enable keypress event, Show arrow                                                                     |
+| Stage 3     | Set timeout for Next Stage, Blank screen, Increment index counter                                                              |
+| Next Stage  | Disable keypress event, Collect stage results, Check if end of trial; If not, call Stage 1. If so, generate & store export URI |
+
+Modifying the number of trials
+-----------------------------------
+1. Open js/navigation.js in the text editor of your choice.
+2. Near the top of the file, change the following line, replacing "4" with the desired number of blocks:
+
+```javascript
+var numberOfTestBlocks = 4;
+```
 
 Variables
 ----------
 | Variable Name           | Type    | Scope              | Description                                                                                                              |
 |-------------------------|---------|--------------------|--------------------------------------------------------------------------------------------------------------------------|
-| **Global**                                                                                                                                                                        |
+| **Config**                                                                                                                                                                        |
 | SwitchTrialSet          | array   | Global             | An array of the switch task trials to be iterated over to run the trial                                                  |
 | SwitchTrialSetCount     | int     | Global             | **Constant** The number of each trial set to add to **SwitchTrialSet** before it is shuffled                             |
 | **SwitchNavigation.js**                                                                                                                                                           |
