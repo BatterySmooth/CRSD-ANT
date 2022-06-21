@@ -1,6 +1,8 @@
 Overview
 ======================
-Overview placeholder
+This is a combination of the CRSD-ANT (produced by [Luke Docksteader](http://docksteaderluke.com) and [Kris Scott](http://krssctt.com/)), and the Switch Task (produced by [Matt Booth](https://github.com/BatterySmooth)).
+
+This software was produced for a 
 
 CRSD-ANT
 ======================
@@ -177,6 +179,14 @@ Switch Task
 Background
 ----------
 The Switch task was created to follow the CRSD-ANT as part of a research project at the University of Bath. The Switch Task is decribed in X paper. The structure has been modified from the CRSD-ANT as described above in order to give the same user experience throughout the two trials and to provide the framework for the test.
+
+License
+-------
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. To view a copy of this licence, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California 94105, USA.
+
+Any original or modified version of this software must attribute the original work to the following (original) author, and include a hyperlink (or at very least a URL reference) to their respective Web site or GitHub Profile:
+
+- Matt Booth - https://github.com/BatterySmooth
 
 Trial Stages
 ----------
