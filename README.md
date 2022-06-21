@@ -2,7 +2,7 @@ Overview
 ======================
 This is a combination of the CRSD-ANT (produced by [Luke Docksteader](http://docksteaderluke.com) and [Kris Scott](http://krssctt.com/)), and the Switch Task (produced by [Matt Booth](https://github.com/BatterySmooth)).
 
-This software was produced for a 
+This software was produced for research conducted at the University of Bath.
 
 CRSD-ANT
 ======================
