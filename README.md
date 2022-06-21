@@ -4,12 +4,12 @@ This is a combination of the CRSD-ANT (produced by [Luke Docksteader](http://doc
 
 This software was produced for research conducted at the University of Bath.
 
-The documentation for the CRSD-ANT has been preserved below, with the only edits being to ensure compatability with the modified system (file names, etc...)
+The full documentation for the CRSD-ANT has been preserved below, with the only edits being to ensure compatability with the modified system (file names, etc...)
 
 Installation
 ----------
 ### Download the source files
-Click on the "Zip" link in the sidebar above or simply click [here.](https://github.com/docksteaderluke/CRSD-ANT/archive/master.zip)
+Click on the "Zip" link in the sidebar above or simply click [here.](https://github.com/BatterySmooth/CRSD-ANT/archive/master.zip)
 
 CRSD-ANT
 ======================
