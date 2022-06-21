@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html manifest="ant.manifest">
+<head>
+	<title>Break</title>
+	<link rel="icon" href="images/Icon.png">
+	<link rel="stylesheet" href="css/SwitchStyle.css" type="text/css" />
+
+	<script src="js/BreakTimer.js" type="text/javascript"></script>
+	<script src="js/BreakOnLoad.js" type="text/javascript"></script>
+
+  <script src="js/GlobalNavigation.js" type="text/javascript"></script>
+	<script src="js/UnifiedDownload.js" type="text/javascript"></script>
+	<script src="js/urlpopulate.js" type="text/javascript"></script>
+
+</head>
+<body onload="BreakOnLoad();" style="background-color: white;">
+	<div id="content">
+		<div id="formInput" class="instructionsPage" >
+			<center>
+			<br />
+			<img src="images/Logo.png" id='logo' width="25%"/>
+			<p>You will now have a 2 minute break before the start of the next task.</p>
+			<p>Once you are ready to proceed, please press 'Next'.</p>
+			<p id="fullscreenNote">For best experience, use fullscreen (<span class='fullscreenKey'>F11</span>)</p>
+			<p id="BreakTimerLabel">00:00</p>
+			</center>
+			<button class="nextButton" onclick="StopBreakTimer(); GlobalNavigate('break');" Style="bottom:10px">Next</button>
+		</div>
+    <div id="attribution">
+      <img src="images/switch/Signature.png" id="MBooth"/>
+      <a href="http://idaios.com/"><img src="images/idaios.png" id="idaioslogo" /></a>
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="images/cc-by-nc-sa.png" /></a>
+    </div>
+  </div>
+</body>
+</html>

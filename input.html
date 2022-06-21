@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html manifest="ant.manifest">
+<head>
+	<title>Input</title>
+	<link rel="icon" href="images/Icon.png">
+	<link rel="stylesheet" href="css/ANT-style.css" type="text/css" />
+	<script src="js/InputOnLoad.js" type="text/javascript"></script>
+  <script src="js/InputSubmitForm.js" type="text/javascript"></script>
+
+  <script src="js/GlobalNavigation.js" type="text/javascript"></script>
+	<script src="js/UnifiedDownload.js" type="text/javascript"></script>
+	<script src="js/urlpopulate.js" type="text/javascript"></script>
+	
+	<script src="config/trialSet.js" type="text/javascript"></script>
+	<script src="config/targetTypes.js" type="text/javascript"></script>
+	<script src="config/dimensions.js" type="text/javascript"></script>
+</head>
+<body onload="InputOnLoad();">
+	<div id="content">
+		<div id="formInput" class="instructionsPage" > <!-- style="height:815px" -->
+			<center>
+			<br />
+			<img src="images/Logo.png" id='logo' width="25%"/>
+			<div name="firefox" id="firefox">
+				<h4>This testing utility is designed for use with Firefox.</h4>
+				<p id="browserWarning">Other browsers are UNSUPPORTED but may work.  Internet Explorer will yield INACCURATE results and is NOT recommended.</p>
+			</div>
+			<p>Please enter the following information:</p>
+			</center>
+			<form name="form" id="form">
+				<label>ID:</label>
+				<input type="text" name="ID" id="ID" required/>
+				<br />
+				<label>Session #:</label>
+				<input type="text" name="sessionNumber" id="sessionNumber" required/>
+				<br />
+				<label>Study ID:</label>
+				<input type="text" name="studyID" id="studyID" required/>
+				<br />
+				<label>Group ID:</label>
+				<input type="text" name="groupID" id="groupID" required/>
+				<br />
+				<label>Age:</label>
+				<input type="text" name="age" id="age" required/>
+				<br />
+				<table id=genderTable>
+					<tr>
+						<td>
+							<label>Gender:</label>
+						</td>
+						<td>
+							<input type="radio" name="gender" value="M" />Male
+						</td>
+					</tr>
+					<tr>
+						<td></td><td>
+							<input type="radio" name="gender" value="F" />Female
+						</td>
+					</tr>
+					<tr>
+						<td></td><td>
+							<input type="radio" name="gender" value="N" />Non-Binary
+						</td>
+					</tr>
+					<tr>
+						<td></td><td>
+							<input type="radio" name="gender" value="X" />Prefer not to say
+						</td>
+					</tr>
+				</table>
+        <br />
+        <label>First Trial:</label>
+        <select name="FirstTrial" id="FirstTrial">
+					<option value="CRSD-ANT" selected>CRSD-ANT</option>
+					<option value="Switch">Switch</option>
+				</select>
+			</form>
+			<center>
+			<p id="fullscreenNote">For best experience, use fullscreen (<span class='fullscreenKey'>F11</span>)</p>
+			</center>
+			<button class="nextButton" onclick="InputSubmitForm();" Style="bottom:10px">Next</button>
+		</div>
+    <div id="attribution">
+      <img src="images/switch/Signature.png" id="MBooth"/>
+      <a href="http://idaios.com/"><img src="images/idaios.png" id="idaioslogo" /></a>
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="images/cc-by-nc-sa.png" /></a>
+    </div>
+  </div>
+</body>
+</html>

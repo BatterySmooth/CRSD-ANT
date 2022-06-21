@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html manifest="ant.manifest">
+<head>
+	<title>Switch</title>
+	<link rel="icon" href="images/Icon.png">
+	<link rel="stylesheet" href="css/SwitchStyle.css" type="text/css" />
+
+	<script src="js/SwitchArrayShuffle.js" type="text/javascript"></script>
+	<script src="js/SwitchBrowserCheck.js" type="text/javascript"></script>
+	<script src="js/SwitchExport.js" type="text/javascript"></script>
+	<script src="js/SwitchGenerateResults.js" type="text/javascript"></script>
+	<script src="js/SwitchNavigation.js" type="text/javascript"></script>
+	<script src="js/SwitchOnLoad.js" type="text/javascript"></script>
+	<script src="js/SwitchTrial.js" type="text/javascript"></script>
+	<script src="js/SwitchTrialSetup.js" type="text/javascript"></script>
+	<script src="js/SwitchValidateArray.js" type="text/javascript"></script>
+
+	<script src="js/GlobalNavigation.js" type="text/javascript"></script>
+	<script src="js/UnifiedDownload.js" type="text/javascript"></script>
+	<script src="js/urlpopulate.js" type="text/javascript"></script>
+
+	<script src="config/SwitchTrialSets.js" type="text/javascript"></script>
+
+</head>
+<body onload="SwitchOnLoad();" style="background-color: white; transition: background-color 3s linear; ">
+	<div id="content">		
+		<div id="instructionPage1" class="instructionsPage" style="visibility:visible; text-align: center;">
+			<p>This test measures some aspects of task switching, and also takes about 10 minutes to complete.</p>
+			<p>You will see 1 of these <b>arrows</b> on the computer screen</p>
+			<div id="InstructionsArrowContainer">
+				<div class="ArrowDiv Blue" id="ArrowUpBlue">
+					<svg height="100" width="100">
+						<polygon points="50,0 100,100 0,100"/>
+					</svg> 
+				</div>
+				<div class="ArrowDiv Blue" id="ArrowDownBlue">
+					<svg height="100" width="100">
+						<polygon points="0,0 100,0 50,100"/>
+					</svg> 
+				</div>
+				<div class="ArrowDiv Red" id="ArrowUpRed">
+					<svg height="100" width="100">
+						<polygon points="50,0 100,100 0,100"/>
+					</svg> 
+				</div>	
+				<div class="ArrowDiv Red" id="ArrowDownRed">
+					<svg height="100" width="100">
+						<polygon points="0,0 100,0 50,100"/>
+					</svg> 
+				</div>
+			</div>
+			<p>You must pay attention to both the <b>colour</b> and <b>direction</b> of the arrow.</p>
+			<p>If you see a <b>blue</b> arrow, you should press the direction that the arrow is pointing using the up and down arrow keys.</p>
+			<p>If you see a <b>red</b> arrow, you should press the <b><i>opposite</i></b> direction that the arrow is pointing.</p>
+			<input class="nextButton" type="button" name="next" value="Next" onclick="pushView('instructionPage2');" />
+		</div>
+		
+		<div id="instructionPage2" class="instructionsPage" style="visibility:hidden; text-align: center;">
+			<p>There will be a cross in the centre of the screen, and the targets will appear in place of the cross.</p>
+			<div class="FixationCross" style="margin:auto;">
+				<svg height="200" width="200">
+					<line x1="100" y1="150" x2="100" y2="50"/>
+					<line x1="50" y1="100" x2="150" y2="100"/>
+				</svg>
+			</div>
+			<p>Please try to keep your eyes fixed on the cross during the test.</p>
+			<input class="previousButton" type="button" name="previous" value="Previous" onclick="popView();" />
+			<input class="nextButton" type="button" name="next" value="Next" onclick="pushView('instructionPage3');" />
+		</div>
+		
+		<div id="instructionPage3" class="instructionsPage" style="visibility:hidden; text-align: center;">
+			<p>As mentioned earlier, you must pay attention to the arrows, and indicate the direction it is indicating by pressing the up or down arrow keys on the keyboard.</p>
+			<p>Remember, <b><i>Red</i></b> arrows indicate the <b><i>opposite</i></b> direction.</p>
+			<p>This test measures both your reaction time and your accuracy, so it is important to respond as quickly as you can, but without making too many errors.</p>
+			<p>To facilitate quick responding, keep your index finger over the up arrow (8 on the num pad), and your thumb on the down arrow (2 on the num pad).</p>
+			<input class="previousButton" type="button" name="previous" value="Previous" onclick="popView();" />
+			<input class="nextButton" type="button" name="next" value="Next" onclick="pushView('instructionPage4');" />
+		</div>
+		
+		<div id="instructionPage4" class="instructionsPage" style="visibility:hidden; text-align: center;">
+			<p>There will be no break or practice during this Trial.</p>
+			<p>The trial will take approximately 15 minutes.</p>
+			<p>Please tell the test supervisor if you are ready to begin.</p>
+			<input class="previousButton" type="button" name="previous" value="Previous" onclick="popView();" />
+			<input class="nextButton" type="button" name="next" value="Next" onclick="SwitchConfirmStart();" />
+		</div>
+		<div id="TestPageContainer" style="visibility:hidden">
+			<!--Blank View-->
+			<div id="TrialFixationCross" class="FixationCross TrialElement" style="visibility:hidden">
+				<svg height="200" width="200">
+					<line x1="100" y1="150" x2="100" y2="50"/>
+					<line x1="50" y1="100" x2="150" y2="100"/>
+				</svg>
+			</div>
+			<!--Blue Up-->
+			<div id="SwitchCueBlueUp" class="TrialElement" style="visibility:hidden">
+				<svg class="Blue" height="200" width="200">
+					<polygon points="100,0 200,200 0,200"/>
+				</svg> 
+			</div>
+			<!--Blue Down-->
+			<div id="SwitchCueBlueDown" class="TrialElement" style="visibility:hidden">
+				<svg class="Blue" height="200" width="200">
+					<polygon points="0,0 200,0 100,200"/>
+				</svg> 
+			</div>
+			<!--Red Up-->
+			<div id="SwitchCueRedUp" class="TrialElement" style="visibility:hidden">
+				<svg class="Red" height="200" width="200">
+					<polygon points="100,0 200,200 0,200"/>
+				</svg>
+			</div>
+			<!--Red Down-->
+			<div id="SwitchCueRedDown" class="TrialElement" style="visibility:hidden">
+				<svg class="Red" height="200" width="200">
+					<polygon points="0,0 200,0 100,200"/>
+				</svg> 
+			</div>
+		</div>
+	</div>
+	<div id="attribution">
+		<img src="images/switch/Signature.png" id="MBooth"/>
+		<a href="http://idaios.com/"><img src="images/idaios.png" id="idaioslogo" /></a>
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons Licence" style="border-width:0" src="images/cc-by-nc-sa.png" /></a>
+	</div>
+</body>
+</html>
