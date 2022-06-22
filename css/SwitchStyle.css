@@ -119,7 +119,7 @@ input[readonly] {
 	bottom: 10%;
 	transform: translate(50%);
 	width: 50%;
-	height: 50%;
+	height: 30%;
 	background-color: rgb(155, 155, 155);
 	overflow: auto;
 	border-style: solid;

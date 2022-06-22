@@ -78,15 +78,16 @@ Flow Diagrams
       direction TB
         IN5(Get 'urlParams' from session storage)
         IN6(Split params into an array)
-        IN7(Loop through the array. <br> If the param has been specified, set the value and mark as read only)
+        IN7(Loop through the array and store each param individually)
+        IN8(Loop through input controls.<br>If the param has been specified,<br>set the value and mark as read only)
 
-        IN5 --> IN6 --> IN7
+        IN5 --> IN6 --> IN7 --> IN8
       end
     end
 
-    InputOnLoad --> |User fills in details| D([Which is the <br> first selected task?])
-    D --> |CRSD-ANT| AN0[ANT.html] --> CRSD-ANTOnLoad
-    D --> |Switch| SW0[switch.html] --> SwitchOnLoad
+    InputOnLoad --> |User fills in details| D1([Which is the <br> first selected task?])
+    D1 --> |CRSD-ANT| AN0[ANT.html] --> CRSD-ANTOnLoad
+    D1 --> |Switch| SW0[switch.html] --> SwitchOnLoad
 
     subgraph CRSD-ANTOnLoad[OnLoad]
       AN1(Loop through target types & <br> populate target selection dropdown)
@@ -99,10 +100,32 @@ Flow Diagrams
       AN1 --> AN2 --> AN3 --> AN4 --> AN5 --> AN6
     end
 
+    subgraph CRSD-ANTTrial[Trials]
+      AN7(User reads instructions and performs trial)
+    end
+
+    CRSD-ANTOnLoad --> CRSD-ANTTrial
     
     subgraph SwitchOnLoad[OnLoad]
       SW1(Set background colour to black)
     end
+
+    subgraph SwitchTrial[Trials]
+      SW2(User reads instructions and performs trial)
+    end
+
+    SwitchOnLoad --> SwitchTrial
+
+    CRSD-ANTTrial & SwitchTrial --> |User finishes trials| B1[break.html]
+
+    subgraph BreakOnLoad[OnLoad]
+      B2(Set background colour to black)
+    end
+
+    B1 --> BreakOnLoad
+    BreakOnLoad --> D2([Which is the <br> first selected task?])
+    D2 --> |CRSD-ANT| AN10[ANT.html] 
+    D2 --> |Switch| SW10[switch.html] 
 
 ```
 
