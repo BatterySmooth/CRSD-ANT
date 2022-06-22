@@ -119,13 +119,19 @@ input[readonly] {
 	bottom: 10%;
 	transform: translate(50%);
 	width: 50%;
-	height: 30% !important; 
+	height: 30%; 
 	background-color: rgb(155, 155, 155);
 	overflow: auto;
 	border-style: solid;
 	border-width: 1px;
 	border-color: black;
 	border-radius: 10px;
+}
+#ExportThankYou + #NextTaskExpl {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%);
 }
 
 /* Attribution */
