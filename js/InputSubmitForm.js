@@ -12,7 +12,8 @@ function InputSubmitForm() {
   firstTrial = document.getElementById('FirstTrial').value;
 
 	if (id && age && gender && sessionNumber && studyID && groupID && firstTrial) {
-		StoreInputData(id, age, gender, sessionNumber, studyID, groupID, firstTrial);
+		round = sessionStorage.getItem("round");
+		StoreInputData(id, age, gender, sessionNumber, studyID, groupID, firstTrial, round);
 		GlobalNavigate('input');
 	} else {
 		window.alert("Please fill in all the fields in the form before continuing");
@@ -28,4 +29,5 @@ function StoreInputData(ID, Age, Gender, SessionNumber, StudyID, GroupID, FirstT
 	sessionStorage.setItem("StudyID", StudyID);
 	sessionStorage.setItem("GroupID", GroupID);
   sessionStorage.setItem("FirstTrial", FirstTrial);
+	sessionStorage.setItem("round", round);
 }

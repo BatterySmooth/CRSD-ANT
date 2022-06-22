@@ -39,8 +39,7 @@ function populateFromURL () {
       document.getElementById('FirstTrial').disabled = true;
     }
     if(params.round) {
-      /* document.getElementById('round').value = params.round;
-      document.getElementById('round').readOnly = true; */
+      sessionStorage.setItem("round", params.round);
     }
   }
 }
