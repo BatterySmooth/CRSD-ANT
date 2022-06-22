@@ -159,7 +159,7 @@ Inside of the newly created "CRSD-ANT" folder there should be a file named "inde
 
 You can use a URL query to pre-populate some of the fields (ID, Session Number, Study ID, Group ID, and Age). This is done in the following format, where '**×**' indicates a value:
 
-> index.html?ID=**×**&sessionNumber=**×**&studyID=**×**&groupID=**×**&age=**×**&firstTrial=**×**
+> index.html?ID=**×**&sessionNumber=**×**&studyID=**×**&groupID=**×**&age=**×**&firstTrial=**×**&round=**×**
 
 The index.html page will extract the values if they are present and pre-populate the main.html page with those values, marking the text boxes as read-only.
 If a value is not present in the URL query, then the input for that field will will not be pre-populated and will be editable.
@@ -172,6 +172,7 @@ If a value is not present in the URL query, then the input for that field will w
 |groupID      |Group ID  			 | String (any)      |
 |age          |Age             | String (any)      |
 |firstTrial   |First Trial     | "ANT" or "Switch" |
+|round        |*N/A*           | *1* or *2*        |
 
 **Important Note:** The CRSD-ANT program will run in any browser, but timing accuracy is not guaranteed in 
 all browsers, and importantly, it is known to be faulty in Internet Explorer.
