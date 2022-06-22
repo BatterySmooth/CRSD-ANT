@@ -18,7 +18,4 @@ function ANTOnLoad() {
 	if (isFirefox) {
 		document.getElementById("firefox").style.display = "none";
 	}
-
-	// Populate form entries from URL and mark as read-only (urlpopulate.js)
-	/* populateFromURL(); */
 }

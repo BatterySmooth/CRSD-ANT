@@ -4,12 +4,107 @@ This is a combination of the CRSD-ANT (produced by [Luke Docksteader](http://doc
 
 This software was produced for research conducted at the University of Bath.
 
-The full documentation for the CRSD-ANT has been preserved below, with the only edits being to ensure compatability with the modified system (file names, etc...)
+The origional documentation for the CRSD-ANT can be found [here.]()
 
 Installation
 ----------
 ### Download the source files
+
 Click on the "Zip" link in the sidebar above or simply click [here.](https://github.com/BatterySmooth/CRSD-ANT/archive/master.zip)
+
+### Extract the archive
+
+Extract the archive using the zip utility of your choice. Once the archive has been extracted a new folder named "CRSD-ANT & Switch" should now exist.
+
+Flow Diagrams
+----------
+
+### Logical Flow Diagram
+
+```mermaid
+  flowchart TD
+    I0[Launch from index.html or URL] --> Extract
+    subgraph Extract
+      I1(Get the URL parameters as a string) --> I2(Split URL parameters into an array)
+      I2 --> I3(Store the values to session storage)
+    end
+
+    Extract --> |User fills in details| D([Which is the <br> first selected task?])
+    D --> |CRSD-ANT| CRSD-ANT
+    D --> |Switch| Switch
+
+    subgraph CRSD-ANT
+      A1[Navigate to: ANT.html] --> a
+    end
+    
+    subgraph Switch
+      S1[Navigate to: switch.html] --> s
+    end
+```
+
+
+### Technical Flow Diagram
+
+```mermaid
+  flowchart TD
+    IX0[index.html] --> IndexOnLoad
+    IX0[index.html] -.Immediate redirect.-> IN0[input.html]
+
+    subgraph IndexOnLoad[OnLoad]
+    direction TB
+      subgraph extractFromURL
+      direction TB
+        IX1(Get the URL params as a string)
+        IX2(Store string to session storage as 'urlParams')
+
+        IX1 --> IX2
+      end
+    end
+    
+    IndexOnLoad --> IN0[input.html]
+
+    IN0[input.html] --> InputOnLoad
+
+    subgraph InputOnLoad[OnLoad]
+    direction TB
+      IN1(Check if user is on Mac)
+      IN2(Change fullscreeen instructions if so)
+      IN3(Check if current browser is Firefox)
+      IN4(Show browser warning if not)
+      
+      IN1 --> IN2 --> IN3 --> IN4 --> populateFromURL
+
+      subgraph populateFromURL
+      direction TB
+        IN5(Get 'urlParams' from session storage)
+        IN6(Split params into an array)
+        IN7(Loop through the array. <br> If the param has been specified, set the value and mark as read only)
+
+        IN5 --> IN6 --> IN7
+      end
+    end
+
+    InputOnLoad --> |User fills in details| D([Which is the <br> first selected task?])
+    D --> |CRSD-ANT| AN0[ANT.html] --> CRSD-ANTOnLoad
+    D --> |Switch| SW0[switch.html] --> SwitchOnLoad
+
+    subgraph CRSD-ANTOnLoad[OnLoad]
+      AN1(Loop through target types & <br> populate target selection dropdown)
+      AN2(Check if user is on Mac)
+      AN3(Change fullscreeen instructions if so)
+      AN4(Push the 'formInput' view)
+      AN5(Check if current browser is Firefox)
+      AN6(Show browser warning if not)
+
+      AN1 --> AN2 --> AN3 --> AN4 --> AN5 --> AN6
+    end
+
+    
+    subgraph SwitchOnLoad[OnLoad]
+      SW1(Set background colour to black)
+    end
+
+```
 
 CRSD-ANT
 ======================
@@ -39,25 +134,25 @@ Extract the archive using the zip utility of your choice. Once the archive has b
 ### Running the CRSD-ANT software
 Inside of the newly created "CRSD-ANT" folder there should be a file named "index.html". Open this file with the Firefox Web browser and follow the on-screen instructions.
 
-You can use a URL query to pre-populate some of the fields (ID, Session Number, Study ID, Group ID, and Age). This is done in the following format, where 'x' indicates a value:
+You can use a URL query to pre-populate some of the fields (ID, Session Number, Study ID, Group ID, and Age). This is done in the following format, where '**×**' indicates a value:
 
-index.html?ID=x&sessionNumber=x&studyID=x&groupID=x&age=x&firstTrial=(ANT/Switch)
+> index.html?ID=**×**&sessionNumber=**×**&studyID=**×**&groupID=**×**&age=**×**&firstTrial=**×**
 
 The index.html page will extract the values if they are present and pre-populate the main.html page with those values, marking the text boxes as read-only.
-If one or more values are not present in the URL query, then the text boxes will will not be pre-populated and will be editable.
+If a value is not present in the URL query, then the input for that field will will not be pre-populated and will be editable.
 
-|	URL Query   |	Element Name	    |
-|-------------|-------------------|
-|ID           |ID                 |
-|sessionID    |Session #          |
-|studyID      |Study ID           |
-|groupID      |Group ID  			    |
-|age          |Age          			|
-|firstTrial   |First Trial        |
+|	URL Param   |	Element Name	 | Values            |
+|-------------|----------------|-------------------|
+|ID           |ID              | String (any)      |
+|sessionID    |Session #       | String (any)      |
+|studyID      |Study ID        | String (any)      |
+|groupID      |Group ID  			 | String (any)      |
+|age          |Age             | String (any)      |
+|firstTrial   |First Trial     | "ANT" or "Switch" |
 
 **Important Note:** The CRSD-ANT program will run in any browser, but timing accuracy is not guaranteed in 
-all browsers, and importantly, it is known to be faulty in Internet Explorer. 
-If you do not have Firefox, you can download it [here.](http://www.mozilla.org/en-US/firefox/new/)
+all browsers, and importantly, it is known to be faulty in Internet Explorer.
+If you do not have Firefox, you can download it [here.](http://www.mozilla.org/en-US/firefox/new/)  
 
 Adding new stimulus images
 --------------------------
@@ -83,84 +178,14 @@ Data files
 ----------
 Description of Data Files Saved by the CRSD-ANT.
 
-### Table 1: Variables in the summary data file. (Please note, this summary has been disabled in this version)
-
-|	Variable Name	|	Description												                                        |	Source					          	|
-|---------------|---------------------------------------------------------------------------|-----------------------------|
-|uniqueID				|Alphanumeric string (with no spaces)					    	                        |Entered by user		      		|
-|studynum				|Alphanumeric string (with no spaces)					    	                        |Entered by user		      		|
-|ANTversion			|Numeric version code									            	                        |Entered by user		      		|
-|TargFile				|Name of graphics file for target stimulus					                        |User selects file at startup	|
-|ANTdate				|Date of data collection								           	                        |Read from system			      	|
-|ANTtime				|Time of day											                	                        |Read from system				      |
-|SessionDur			|Length of session in seconds (start of practice -> end of last test block)	|Computed		                  | 
-|Session				|Session number											                                        |Entered by user			      	|
-|Age					  |Age of participant (years)								                                  |Entered by user			      	|
-|Sex					  |Sex of participant (M or F)							                                  |Entered by user (checkbox?)	|
-|Group					|Alphanumeric group code								                                    |Entered by user			      	|
-|ANT.N					|Total number of trials (excluding practice)			                          |Computed					            |
-|med.all				|Median RT for all test block trials[1]					                            |Computed					            |
-|mean.all				|Mean RT for all test block trials							                            |Computed					            |
-|sd.all					|Standard deviation of all RT for all test block trials		                  |Computed					            |
-|min.all				|Minimum RT for all test block trials						                            |Computed					            |
-|max.all				|Maximum RT for all test block trials						                            |Computed					            |
-|alert					|NOCUE – DOUBLE												                                      |Computed					            |
-|orient					|CENTRE – SPATIAL											                                      |Computed					            |
-|conflict				|INCONG – CONG												                                      |Computed					            |
-|pc.all					|Percent correct over all test trials[2]					                          |Computed					            |
-|e.all					|Percent errors over all test trials						                            |Computed					            |
-|nocue					|Mean(med.C1T1, med.C1T2)									                                  |Computed					            |
-|double					|Mean(med.C2T1, med.C2T2)									                                  |Computed					            |
-|centre					|Mean(med.C3T1, med.C3T2)									                                  |Computed					            |
-|spatial				|Mean(med.C3T1, med.C3T2)									                                  |Computed					            |
-|cong					  |Mean(med.C1T1, med.C2T1, med.C3T1, med.C4T1)				                        |Computed					            |
-|incong					|Mean(med.C1T2, med.C2T2, med.C3T2, med.C4T2)				                        |Computed					            |
-|med.C1T1				|Median RT: No Cue × Congruent								                              |Computed					            |
-|med.C1T2				|Median RT: No Cue × Incongruent							                              |Computed					            |
-|med.C2T1				|Median RT: Centre Cue × Congruent							                            |Computed					            |
-|med.C2T2				|Median RT: Centre Cue × Incongruent						                            |Computed					            |
-|med.C3T1				|Median RT: Double Cue × Congruent							                            |Computed					            |
-|med.C3T2				|Median RT: Double Cue × Incongruent						                            |Computed					            |
-|med.C4T1				|Median RT: Spatial Cue × Congruent							                            |Computed					            |
-|med.C4T2				|Median RT: Spatial Cue × Incongruent						                            |Computed					            |
-|mean.C1T1			|Mean RT: No Cue × Congruent								                                |Computed					            |
-|mean.C1T2			|Mean RT: No Cue × Incongruent								                              |Computed					            |
-|mean.C2T1			|Mean RT: Centre Cue × Congruent							                              |Computed					            |
-|mean.C2T2			|Mean RT: Centre Cue × Incongruent							                            |Computed					            |
-|mean.C3T1			|Mean RT: Double Cue × Congruent							                              |Computed					            |
-|mean.C3T2			|Mean RT: Double Cue × Incongruent							                            |Computed					            |
-|mean.C4T1			|Mean RT: Spatial Cue × Congruent							                              |Computed					            |
-|mean.C4T2			|Mean RT: Spatial Cue × Incongruent							                            |Computed					            |
-|e.nocue				|% Errors : All No Cue trials								                                |Computed					            |
-|e.double				|% Errors : All Double Cue trials						      	                        |Computed					            |
-|e.centre				|% Errors : All Centre Cue trials						      	                        |Computed					            |
-|e.spatial			|% Errors : All Spatial Cue trials						    	                        |Computed					            |
-|e.incong				|% Errors: All Incongruent trials							                              |Computed					            |
-|e.cong					|% Errors: All Congruent trials							      	                        |Computed					            |
-|pc.C1T1				|% Errors: No Cue × Congruent							        	                        |Computed					            |
-|pc.C1T2				|% Errors: No Cue × Incongruent						      		                        |Computed					            |
-|pc.C2T1				|% Errors: Centre Cue × Congruent					      		                        |Computed					            |
-|pc.C2T2				|% Errors: Centre Cue × Incongruent					    		                        |Computed					            |
-|pc.C3T1				|% Errors: Double Cue × Congruent						      	                        |Computed					            |
-|pc.C3T2				|% Errors: Double Cue × Incongruent					    		                        |Computed					            |
-|pc.C4T1				|% Errors: Spatial Cue × Congruent					    		                        |Computed					            |
-|pc.C4T2				|% Errors: Spatial Cue × Incongruent				    		                        |Computed					            |
-
-[1] **Note:** For all summary statistics that are computed based on response times, only correct responses with RTs between 100 
-and 1500 ms are used. RT < 100 ms is considered anticipatory, and so is excluded; and the maximum display 
-duration for the target is 1500 ms, so that is also the maximum possible RT.
-
-[2] A trial is considered correct if the subject correctly indicated the direction of the target arrow, and if the RT was 
-within the range 100 to 1500 ms.
-
-### Table 2: Variables in the raw data file.
+### Table 1: Variables in the raw data file.
 
 |	Variable Name		|	Description											                                    	|	Source					          	|
 |-----------------|-----------------------------------------------------------------------|-----------------------------|
 |uniqueID				  |Alphanumeric string (with no spaces)						                        |Entered by user			      	|
 |StudyNum				  |Alphanumeric string (with no spaces)					                         	|Entered by user			      	|
 |age					    |Age of participant (years)								                            	|Entered by user			      	|
-|sex				    	|Sex of participant (M or F)							                            	|Entered by user (checkbox?)	|
+|sex				    	|Sex of participant (M, F, N or X)				                            	|Entered by user (checkbox?)	|
 |group				  	|Alphanumeric group code								                              	|Entered by user			      	|
 |Date				    	|Date of data collection								                               	|Read from system				      |
 |block				  	|Block number (0=practice; 1 & 2 for test blocks)	                  		|								              |
@@ -209,7 +234,7 @@ Within each response, the trial is broken up into 4 stages and an initiation sta
 | Stage 3     | Set timeout for Next Stage, Blank screen, Increment index counter                                                              |
 | Next Stage  | Disable keypress event, Collect stage results, Check if end of trial; If not, call Stage 1. If so, generate & store export URI |
 
-Modifying the number of trials
+Modifying the Number of Trials
 -----------------------------------
 1. Open js/navigation.js in the text editor of your choice.
 2. Near the top of the file, change the following line, replacing "4" with the desired number of blocks:
@@ -238,3 +263,4 @@ Variables
 | **SwitchArrayShuffle.js**                                                                                                                                                         |
 | CurrentIndex            | int     | ShuffleArray()     | **Functional** - The index of the current array item                                                                     |
 | RandomIndex             | int     | ShuffleArray()     | **Functional** - A generated random index for the array while shuffling                                                  |
+
