@@ -167,7 +167,7 @@ If a value is not present in the URL query, then the input for that field will w
 |	URL Param   |	Element Name	 | Values            |
 |-------------|----------------|-------------------|
 |ID           |ID              | String (any)      |
-|sessionID    |Session #       | String (any)      |
+|sessionNumber|Session #       | String (any)      |
 |studyID      |Study ID        | String (any)      |
 |groupID      |Group ID  			 | String (any)      |
 |age          |Age             | String (any)      |

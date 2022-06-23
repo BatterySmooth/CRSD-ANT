@@ -9,6 +9,7 @@ function ExportOnLoad() {
     document.getElementById("ExportThankYou").style.visibility = "visible"
   }
   DownloadAllData();
+  sessionStorage.clear;
 }
 
 function ExportFadeBackground() {
