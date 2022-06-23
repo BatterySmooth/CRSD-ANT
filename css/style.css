@@ -14,18 +14,50 @@ body {
 .nextButton {
 	position: absolute;
 	bottom: 10px;
-	right: 5px;
+	right: 50%;
+  width: 100px;
+  height: 50px;
+	transform: translate(152%);
 }
 .previousButton {
 	position: absolute;
 	bottom: 10px;
-	right: 55px;
+	right: 50%;
+  width: 100px;
+  height: 50px;
+	transform: translate(48%);
 }
 
-/* Front Page/Controls */
-#browserWarning {
+/* Input Page */
+#image {
+	height: 200px;
+	width: 200px;
+}
+#formInput label {
+	display: block;
+	font-weight: bold;
+	text-align: left;
+	width: 200px;
+	float: left;
+}
+#formInput #browserWarning {
 	font-size: small;
 	margin-top: -15px;
+}
+#form {
+	position: relative;
+	margin: 0 auto 0 auto;
+	width: 400px;
+}
+#formInput #fullscreenNote {
+	font-size: small;
+}
+#genderTable {
+	border-collapse: collapse;
+}
+#genderTable td {
+	padding: 0; 
+	margin: 0;
 }
 #fullscreenNote {
 	font-size: small;
@@ -40,7 +72,7 @@ input[readonly] {
 	border-color: initial;
 }
 
-/* @ group Instructions */
+/* Instructions Pages */
 .instructionsPage {
 	position: absolute;
 	top: 0;
@@ -63,11 +95,18 @@ input[readonly] {
 	position: relative;
 	top: -24px;
 }
+#instructionPage3 .imageintext {
+	position: relative;
+	top: 15px;
+}
 #InstructionsArrowContainer {
 	margin: auto;
 	height: 100px;
 	width: 400px;
 	display: flex;
+}
+.targetTypeRef {
+	width: 6em;
 }
 
 /* Arrows */
@@ -83,7 +122,13 @@ input[readonly] {
 	fill: rgb(253, 71, 71);
 }
 
-/* Trial Page*/
+/* Test Page */
+#testPageContainer {
+	position: fixed;
+}
+#testPage {
+	position: relative;
+}
 .FixationCross {
 	background-color: black;
 	height: 200px;
@@ -104,8 +149,24 @@ input[readonly] {
 .TrialElement {
 	position: absolute;
 }
+.display {
+	position: absolute;
+}
+.target {
+	vertical-align: bottom;
+}
+.cue {
+	vertical-align: bottom;
+}
+.practiceFeedback {
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 100%;
+	text-align: center;
+}
 
-/* group Export Page */
+/* Export Page */
 #exportPage {
 	font-size: medium;
 }

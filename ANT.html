@@ -3,7 +3,9 @@
 <head>
 	<title>ANT</title>
 	<link rel="icon" href="images/Icon.png">
-	<link rel="stylesheet" href="css/ANT-style.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/styleLight.css" type="text/css" />
+
 	<script src="js/ANTonLoad.js" type="text/javascript"></script>
 	<script src="js/ANTtimer.js" type="text/javascript"></script>
 	<script src="js/ANTnavigation.js" type="text/javascript"></script>
@@ -73,9 +75,7 @@
 			<center>
 			<p id="fullscreenNote">For best experience, use fullscreen (<span class='fullscreenKey'>F11</span>)</p>
 			</center>
-			<button class="previousButton" onclick="window.location.reload();" Style="bottom:10px">Clear</button>
-			<button class="nextButton" onclick="submitForm();" Style="bottom:10px">Next</button>
-			<!-- <input id="nextButton" class="nextButton" type="button" name="next" value="Next" onclick="submitForm();" />	 This brokey -->
+			<button class="nextButton" id="ANTFirstNextButton" onclick="submitForm();" Style="bottom:10px">Next</button>
 		</div>
 		
 		<div id="instructionPage1" class="instructionsPage" style="visibility:hidden; text-align: center;">
@@ -86,7 +86,7 @@
 			</center>
 			<p>You must pay attention to the <b><i>CENTRAL</i></b> <span class='targetTypeRef'>target</span>, and indicate which way it is pointing by pressing the left or right arrow keys on the keyboard.
 			</p>
-			<input class="previousButton" type="button" name="previous" value="Previous" onclick="popView();" />
+<!-- 			<input class="previousButton" type="button" name="previous" value="Previous" onclick="popView();" /> -->
 			<input class="nextButton" type="button" name="next" value="Next" onclick="pushView('instructionPage2');" />
 		</div>
 		
@@ -137,7 +137,7 @@
 		<div id="instructionPage4" class="instructionsPage" style="visibility:hidden; text-align: center;">
 			<p>As mentioned earlier, you must pay attention to the central <span class='targetTypeRef'>target</span>, and indicate which way it is pointing by pressing the left or right arrow keys on the keyboard.</p>
 			<p>This test measures both your reaction time and your accuracy, so it is important to respond as quickly as you can, but without making too many errors.</p>
-			<p>To facilitate quick responding, keep your left and right index fingers over the left and right arrow keys respectively.</p>
+			<p>To facilitate quick responding, keep your <b>left and right index fingers over the left and right arrow keys</b> respectively.</p>
 			<input class="previousButton" type="button" name="previous" value="Previous" onclick="popView();" />
 			<input class="nextButton" type="button" name="next" value="Next" onclick="pushView('instructionPage5');" />
 		</div>

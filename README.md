@@ -16,118 +16,6 @@ Click on the "Zip" link in the sidebar above or simply click [here.](https://git
 
 Extract the archive using the zip utility of your choice. Once the archive has been extracted a new folder named "CRSD-ANT & Switch" should now exist.
 
-Flow Diagrams
-----------
-
-### Logical Flow Diagram
-
-```mermaid
-  flowchart TD
-    I0[Launch from index.html or URL] --> Extract
-    subgraph Extract
-      I1(Get the URL parameters as a string) --> I2(Split URL parameters into an array)
-      I2 --> I3(Store the values to session storage)
-    end
-
-    Extract --> |User fills in details| D([Which is the <br> first selected task?])
-    D --> |CRSD-ANT| CRSD-ANT
-    D --> |Switch| Switch
-
-    subgraph CRSD-ANT
-      A1[Navigate to: ANT.html] --> a
-    end
-    
-    subgraph Switch
-      S1[Navigate to: switch.html] --> s
-    end
-```
-
-
-### Technical Flow Diagram
-
-```mermaid
-  flowchart TD
-    IX0[index.html] --> IndexOnLoad
-    IX0[index.html] -.Immediate redirect.-> IN0[input.html]
-
-    subgraph IndexOnLoad[OnLoad]
-    direction TB
-      subgraph extractFromURL
-      direction TB
-        IX1(Get the URL params as a string)
-        IX2(Store string to session storage as 'urlParams')
-
-        IX1 --> IX2
-      end
-    end
-    
-    IndexOnLoad --> IN0[input.html]
-
-    IN0[input.html] --> InputOnLoad
-
-    subgraph InputOnLoad[OnLoad]
-    direction TB
-      IN1(Check if user is on Mac)
-      IN2(Change fullscreeen instructions if so)
-      IN3(Check if current browser is Firefox)
-      IN4(Show browser warning if not)
-      
-      IN1 --> IN2 --> IN3 --> IN4 --> populateFromURL
-
-      subgraph populateFromURL
-      direction TB
-        IN5(Get 'urlParams' from session storage)
-        IN6(Split params into an array)
-        IN7(Loop through the array and store each param individually)
-        IN8(Loop through input controls.<br>If the param has been specified,<br>set the value and mark as read only)
-
-        IN5 --> IN6 --> IN7 --> IN8
-      end
-    end
-
-    InputOnLoad --> |User fills in details| D1([Which is the <br> first selected task?])
-    D1 --> |CRSD-ANT| AN0[ANT.html] --> CRSD-ANTOnLoad
-    D1 --> |Switch| SW0[switch.html] --> SwitchOnLoad
-
-    subgraph CRSD-ANTOnLoad[OnLoad]
-      AN1(Loop through target types & <br> populate target selection dropdown)
-      AN2(Check if user is on Mac)
-      AN3(Change fullscreeen instructions if so)
-      AN4(Push the 'formInput' view)
-      AN5(Check if current browser is Firefox)
-      AN6(Show browser warning if not)
-
-      AN1 --> AN2 --> AN3 --> AN4 --> AN5 --> AN6
-    end
-
-    subgraph CRSD-ANTTrial[Trials]
-      AN7(User reads instructions and performs trial)
-    end
-
-    CRSD-ANTOnLoad --> CRSD-ANTTrial
-    
-    subgraph SwitchOnLoad[OnLoad]
-      SW1(Set background colour to black)
-    end
-
-    subgraph SwitchTrial[Trials]
-      SW2(User reads instructions and performs trial)
-    end
-
-    SwitchOnLoad --> SwitchTrial
-
-    CRSD-ANTTrial & SwitchTrial --> |User finishes trials| B1[break.html]
-
-    subgraph BreakOnLoad[OnLoad]
-      B2(Set background colour to black)
-    end
-
-    B1 --> BreakOnLoad
-    BreakOnLoad --> D2([Which is the <br> first selected task?])
-    D2 --> |CRSD-ANT| AN10[ANT.html] 
-    D2 --> |Switch| SW10[switch.html] 
-
-```
 
 CRSD-ANT
 ======================
@@ -260,12 +148,14 @@ Within each response, the trial is broken up into 4 stages and an initiation sta
 
 Modifying the Number of Trials
 -----------------------------------
-1. Open js/navigation.js in the text editor of your choice.
-2. Near the top of the file, change the following line, replacing "4" with the desired number of blocks:
+1. Open config/SwitchTrialSets.js in the text editor of your choice.
+2. Near the top of the file, change the following line, replacing "50" with the desired number of sets:
 
 ```javascript
-var numberOfTestBlocks = 4;
+const SwitchTrialSetCount = 50;
 ```
+
+3. Note, that this constant is the multiplier for the 4 base sets, so the total number of sets will be this number multiplied by 4
 
 Variables
 ----------
@@ -288,3 +178,116 @@ Variables
 | CurrentIndex            | int     | ShuffleArray()     | **Functional** - The index of the current array item                                                                     |
 | RandomIndex             | int     | ShuffleArray()     | **Functional** - A generated random index for the array while shuffling                                                  |
 
+
+Flow Diagrams
+----------
+
+### Logical Flow Diagram
+
+```mermaid
+  flowchart TD
+    I0[Launch from index.html or URL] --> Extract
+    subgraph Extract
+      I1(Get the URL parameters as a string) --> I2(Split URL parameters into an array)
+      I2 --> I3(Store the values to session storage)
+    end
+
+    Extract --> |User fills in details| D([Which is the <br> first selected task?])
+    D --> |CRSD-ANT| CRSD-ANT
+    D --> |Switch| Switch
+
+    subgraph CRSD-ANT
+      A1[Navigate to: ANT.html] --> a
+    end
+    
+    subgraph Switch
+      S1[Navigate to: switch.html] --> s
+    end
+```
+
+
+### Technical Flow Diagram
+
+```mermaid
+  flowchart TD
+    IX0[index.html] --> IndexOnLoad
+    IX0[index.html] -.Immediate redirect.-> IN0[input.html]
+
+    subgraph IndexOnLoad[OnLoad]
+    direction TB
+      subgraph extractFromURL
+      direction TB
+        IX1(Get the URL params as a string)
+        IX2(Store string to session storage as 'urlParams')
+
+        IX1 --> IX2
+      end
+    end
+    
+    IndexOnLoad --> IN0[input.html]
+
+    IN0[input.html] --> InputOnLoad
+
+    subgraph InputOnLoad[OnLoad]
+    direction TB
+      IN1(Check if user is on Mac)
+      IN2(Change fullscreeen instructions if so)
+      IN3(Check if current browser is Firefox)
+      IN4(Show browser warning if not)
+      
+      IN1 --> IN2 --> IN3 --> IN4 --> populateFromURL
+
+      subgraph populateFromURL
+      direction TB
+        IN5(Get 'urlParams' from session storage)
+        IN6(Split params into an array)
+        IN7(Loop through the array and store each param individually)
+        IN8(Loop through input controls.<br>If the param has been specified,<br>set the value and mark as read only)
+
+        IN5 --> IN6 --> IN7 --> IN8
+      end
+    end
+
+    InputOnLoad --> |User fills in details| D1([Which is the <br> first selected task?])
+    D1 --> |CRSD-ANT| AN0[ANT.html] --> CRSD-ANTOnLoad
+    D1 --> |Switch| SW0[switch.html] --> SwitchOnLoad
+
+    subgraph CRSD-ANTOnLoad[OnLoad]
+      AN1(Loop through target types & <br> populate target selection dropdown)
+      AN2(Check if user is on Mac)
+      AN3(Change fullscreeen instructions if so)
+      AN4(Push the 'formInput' view)
+      AN5(Check if current browser is Firefox)
+      AN6(Show browser warning if not)
+
+      AN1 --> AN2 --> AN3 --> AN4 --> AN5 --> AN6
+    end
+
+    subgraph CRSD-ANTTrial[Trials]
+      AN7(User reads instructions and performs trial)
+    end
+
+    CRSD-ANTOnLoad --> CRSD-ANTTrial
+    
+    subgraph SwitchOnLoad[OnLoad]
+      SW1(Set background colour to black)
+    end
+
+    subgraph SwitchTrial[Trials]
+      SW2(User reads instructions and performs trial)
+    end
+
+    SwitchOnLoad --> SwitchTrial
+
+    CRSD-ANTTrial & SwitchTrial --> |User finishes trials| B1[break.html]
+
+    subgraph BreakOnLoad[OnLoad]
+      B2(Set background colour to black)
+    end
+
+    B1 --> BreakOnLoad
+    BreakOnLoad --> D2([Which is the <br> first selected task?])
+    D2 --> |CRSD-ANT| AN10[ANT.html] 
+    D2 --> |Switch| SW10[switch.html] 
+
+```

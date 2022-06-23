@@ -18,4 +18,7 @@ function ANTOnLoad() {
 	if (isFirefox) {
 		document.getElementById("firefox").style.display = "none";
 	}
+
+	// Click Next button to skip the monitor setup (for this setup process)
+	document.getElementById("ANTFirstNextButton").click();
 }
