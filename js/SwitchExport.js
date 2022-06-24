@@ -37,7 +37,6 @@ function GenerateExportLink(data) {
 
 	//To create the download link
 	createDownloadData(fileName+' - Data.csv',csvData,"Download Switch raw data export");
-	// DownloadAllData();
 
 	// Navigate depending on next trial
 	GlobalNavigate('switch');

@@ -179,32 +179,8 @@ Variables
 | RandomIndex             | int     | ShuffleArray()     | **Functional** - A generated random index for the array while shuffling                                                  |
 
 
-Flow Diagrams
+Flow Diagram
 ----------
-
-### Logical Flow Diagram
-
-```mermaid
-  flowchart TD
-    I0[Launch from index.html or URL] --> Extract
-    subgraph Extract
-      I1(Get the URL parameters as a string) --> I2(Split URL parameters into an array)
-      I2 --> I3(Store the values to session storage)
-    end
-
-    Extract --> |User fills in details| D([Which is the <br> first selected task?])
-    D --> |CRSD-ANT| CRSD-ANT
-    D --> |Switch| Switch
-
-    subgraph CRSD-ANT
-      A1[Navigate to: ANT.html] --> a
-    end
-    
-    subgraph Switch
-      S1[Navigate to: switch.html] --> s
-    end
-```
-
 
 ### Technical Flow Diagram
 
@@ -213,14 +189,14 @@ Flow Diagrams
     IX0[index.html] --> IndexOnLoad
     IX0[index.html] -.Immediate redirect.-> IN0[input.html]
 
-    subgraph IndexOnLoad[OnLoad]
+    subgraph IndexOnLoad["On Load"]
     direction TB
-      subgraph extractFromURL
+      subgraph extractFromURL["urlpopulate.js > extractFromURL();"]
       direction TB
         IX1(Get the URL params as a string)
         IX2(Store string to session storage as 'urlParams')
 
-        IX1 --> IX2
+        IX1 --> |Split URL string from '?'| IX2
       end
     end
     
@@ -228,16 +204,21 @@ Flow Diagrams
 
     IN0[input.html] --> InputOnLoad
 
-    subgraph InputOnLoad[OnLoad]
+    subgraph InputOnLoad["InputOnLoad.js > InputOnLoad();"]
     direction TB
       IN1(Check if user is on Mac)
-      IN2(Change fullscreeen instructions if so)
+      IN2(Change fullscreeen instructions)
       IN3(Check if current browser is Firefox)
-      IN4(Show browser warning if not)
+      IN4(Show browser warning)
       
-      IN1 --> IN2 --> IN3 --> IN4 --> populateFromURL
+      IN1 -.Yes.-> IN2 
+      IN1 --> |No|IN3
+      IN2 -.-> IN3
+      IN3 -.No.-> IN4
+      IN3 --> |Yes| populateFromURL
+      IN4 -.-> populateFromURL
 
-      subgraph populateFromURL
+      subgraph populateFromURL["InputOnLoad.js > populateFromURL();"]
       direction TB
         IN5(Get 'urlParams' from session storage)
         IN6(Split params into an array)
@@ -247,47 +228,203 @@ Flow Diagrams
         IN5 --> IN6 --> IN7 --> IN8
       end
     end
+    
+    IN9(User fills in details)
 
-    InputOnLoad --> |User fills in details| D1([Which is the <br> first selected task?])
-    D1 --> |CRSD-ANT| AN0[ANT.html] --> CRSD-ANTOnLoad
-    D1 --> |Switch| SW0[switch.html] --> SwitchOnLoad
+    InputOnLoad --> IN9
 
-    subgraph CRSD-ANTOnLoad[OnLoad]
+    subgraph InputSubmitForm["InputSubmitForm.js > InputSubmitForm();"]
+    direction TB
+      IS1(Get parameters from the fields on input form)
+      IS2(Check if all fields are filled)
+      IS3(Prompt user to<br>fill in all details)
+      IS4(Get 'round' number from session storage)
+
+      subgraph StoreInputData["InputSubmitForm.js > StoreInputData();"]
+      direction TB
+        IS5(Clear session storage)
+        IS6(loop through each parameter and add to session storage)
+      end
+
+      subgraph InputGlobalNav["GlobalNavigation.js > GlobalNavigate();"]
+      direction TB
+          GN1(Get first trial from session storage)
+          GN2(Check which page to navigate to<br>via a switch statement)
+      end
+    end
+
+    IS1 --> IS2
+    IS2 -.No.-> IS3
+    IS2 --> |Yes| IS4
+    IS4 --> StoreInputData
+    IS5 --> IS6
+    StoreInputData --> InputGlobalNav
+    GN1 --> GN2
+
+    IN9 --> |"Next button 'onClick'"| InputSubmitForm
+    GN2 --> D1([Which is the <br> first selected task?])
+    D1 --> |CRSD-ANT| AN0[Navigate to ANT.html]
+    D1 --> |Switch| SW0[Navigate to switch.html]
+    AN0 --> CRSD-ANTOnLoad
+    SW0 --> SwitchOnLoad
+
+    subgraph CRSD-ANTOnLoad["ANTonLoad.js > ANTOnLoad();"]
+    direction TB
       AN1(Loop through target types & <br> populate target selection dropdown)
       AN2(Check if user is on Mac)
-      AN3(Change fullscreeen instructions if so)
+      AN3(Change fullscreeen instructions)
       AN4(Push the 'formInput' view)
       AN5(Check if current browser is Firefox)
-      AN6(Show browser warning if not)
+      AN6(Show browser warning)
+      AN7(Click the 'Next' button to skip<br>monitor and dropdown selection)
 
-      AN1 --> AN2 --> AN3 --> AN4 --> AN5 --> AN6
+      AN1 --> AN2
+      AN2 -.Yes.-> AN3
+      AN2 --> |No| AN4
+      AN3 -.-> AN4
+      AN4 --> AN5
+      AN5 -.No.-> AN6
+      AN5 --> |Yes| AN7
+      AN6 -.-> AN7
     end
 
-    subgraph CRSD-ANTTrial[Trials]
-      AN7(User reads instructions and performs trial)
+    subgraph SwitchOnLoad["SwitchOnLoad.js > SwitchOnLoad();"]
+    direction TB
+      SW1(Set background colour to black with fade)
     end
 
-    CRSD-ANTOnLoad --> CRSD-ANTTrial
-    
-    subgraph SwitchOnLoad[OnLoad]
-      SW1(Set background colour to black)
+    subgraph ANTTrial[CRSD-ANT Trial]
+    direction TB
+      AN8(User reads instructions and performs trial)
+
+      subgraph ANTExport["ANTexport.js > generateExportLink();"]
+      direction TB
+        AX1(Create file name)
+        AX2("Generate export data:<br>ANTanalyseResults.js > generateData();")
+        AX3("Create download data URI:<br>ANTexport.js > createDownloadData();")
+        AX4(Save export data to session storage)
+
+        AX1 --> AX2
+        AX2 --> AX3
+        AX3 --> AX4
+      end
+
+      subgraph ANTGlobalNav["GlobalNavigation.js > GlobalNavigate();"]
+      direction TB
+          GN5(Get first trial from session storage)
+          GN6(Check which page to navigate to<br>via a switch statement)
+
+          GN5 --> GN6
+      end
+
+      AN8 --> |User finishes trials| ANTExport
+      ANTExport --> ANTGlobalNav
     end
 
-    subgraph SwitchTrial[Trials]
-      SW2(User reads instructions and performs trial)
+    subgraph SwitchTrial[Switch Trial]
+    direction TB
+      SW3(User reads instructions and performs trial)
+
+      subgraph SwitchExport["SwitchExport.js > GenerateExportLink();"]
+      direction TB
+        SX1(Create file name)
+        SX2("Generate export data:<br>SwitchGenerateResults.js > SwitchGenerateData();")
+        SX3("Create download data URI:<br>SwitchExport.js > createDownloadData();")
+        SX4(Save export data to session storage)
+
+        SX1 --> SX2
+        SX2 --> SX3
+        SX3 --> SX4
+      end
+
+      subgraph SwitchGlobalNav["GlobalNavigation.js > GlobalNavigate();"]
+      direction TB
+        GN3(Get first trial from session storage)
+        GN4(Check which page to navigate to<br>via a switch statement)
+
+        GN3 --> GN4
+      end
+
+      SW3 --> |User finishes trials| SwitchExport
+      SX4 --> SwitchGlobalNav
     end
 
+    CRSD-ANTOnLoad --> ANTTrial
     SwitchOnLoad --> SwitchTrial
+    ANTTrial & SwitchTrial --> B1[break.html]
 
-    CRSD-ANTTrial & SwitchTrial --> |User finishes trials| B1[break.html]
-
-    subgraph BreakOnLoad[OnLoad]
-      B2(Set background colour to black)
+    subgraph BreakOnLoad["OnLoad();"]
+    direction TB
+      B2("Set background colour to white with fade<br>(for switch task background)")
+      B3(Start Break timer)
     end
 
     B1 --> BreakOnLoad
-    BreakOnLoad --> D2([Which is the <br> first selected task?])
-    D2 --> |CRSD-ANT| AN10[ANT.html] 
-    D2 --> |Switch| SW10[switch.html] 
+    B2 --> B3
+    B3 -.Timer loop.-> B3
+
+    subgraph BreakGlobalNav["GlobalNavigation.js > GlobalNavigate();"]
+    direction TB
+        GN7(Get first trial from session storage)
+        GN8(Check which page to navigate to<br>via a switch statement)
+
+        GN7 --> GN8
+    end
+
+    BreakOnLoad --> |Break finished| BreakGlobalNav
+    BreakGlobalNav --> D2([Which is the <br> first selected task?])
+    D2 --> |CRSD-ANT| SW10[switch.html] 
+    D2 --> |Switch| AN10[ANT.html] 
+
+    subgraph SwitchRound2[Switch Trial]
+    direction TB
+      SW11(Perform Switch task as above)
+      SW12(Extract and save results as above)
+
+      SW11 --> SW12
+    end
+
+    SW10 --> SwitchRound2
+
+    subgraph ANTRound2[CRSD-ANT Trial]
+    direction TB
+      AN11(Perform CRSD-ANT task as above)
+      AN12(Extract and save results as above)
+
+      AN11 --> AN12
+    end
+    
+    AN10 --> ANTRound2
+    EX1[export.html]
+    SwitchRound2 & ANTRound2 --> |Trial 2 completed| EX1
+
+    subgraph ExportOnLoad["OnLoad();"]
+    direction TB
+      EX2("Set background colour to white with fade<br>(for switch task background)")
+      EX3(Check if round == 2)
+      EX4(Show next step info)
+      EX5(Show 'Thank You' message)
+
+      EX2 --> EX3
+      EX3 --> |Round == 1| EX4
+      EX3 --> |Round == 2| EX5
+
+      subgraph DownloadAllData["DownloadAllData();"]
+      direction TB
+        DN1("Create ANT download link:<br>createDownloadLink(DivName,InnerHTML);")
+        DN2("Create Switch download link:<br>createDownloadLink(DivName,InnerHTML);")
+        DN3("Click ANT download link:<br>ClickDownloadLink(divName);")
+        DN4("Click Switch download link:<br>ClickDownloadLink(divName);")
+
+        DN1 --> DN2 --> DN3 --> DN4
+      end
+
+      EX6(Clear session storage)
+      EX4 & EX5 --> DownloadAllData 
+      DN4 --> EX6
+    end
+    
+    EX1 --> ExportOnLoad
+
 
 ```

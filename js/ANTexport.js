@@ -1,5 +1,3 @@
-//This file needs some refactoring to tidy it up a little.
-
 //Takes the data as a multidimensional array and builds it into a nice CSV string, with an optional newline character.  It is recommended to just use \r\n, as it should produce a newline on every platform, but if you want to include code to detect the platform you can do that, and pass in the appropriate newline string.
 function dataCSV(data,newline) {
 	csv = "";					//Start with an empty string
