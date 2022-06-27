@@ -16,6 +16,31 @@ Click on the "Zip" link in the sidebar above or simply click [here.](https://git
 
 Extract the archive using the zip utility of your choice. Once the archive has been extracted a new folder named "CRSD-ANT & Switch" should now exist.
 
+Usage
+----------
+
+Inside of the newly created folder there should be a file named "index.html". Open this file with the Firefox Web browser and follow the on-screen instructions.
+
+You can use a URL query to pre-populate some of the fields (ID, Session Number, Study ID, Group ID, and Age). You can also populate the 'round' field, which manages what message shows at the end. This is done in the following format, where '**×**' indicates a value:
+
+> index.html?ID=**×**&sessionNumber=**×**&studyID=**×**&groupID=**×**&age=**×**&firstTrial=**×**&round=**×**
+
+The index.html page will extract the values if they are present and pre-populate the main.html page with those values, marking the text boxes as read-only.
+If a value is not present in the URL query, then the input for that field will will not be pre-populated and will be editable.
+
+|	URL Param   |	Element Name	 | Values            |
+|-------------|----------------|-------------------|
+|ID           |ID              | String (any)      |
+|sessionNumber|Session #       | String (any)      |
+|studyID      |Study ID        | String (any)      |
+|groupID      |Group ID  			 | String (any)      |
+|age          |Age             | String (any)      |
+|firstTrial   |First Trial     | "ANT" or "Switch" |
+|round        |*N/A*           | *1* or *2*        |
+
+**Important Note:** The CRSD-ANT program will run in any browser, but timing accuracy and result integrity is not guaranteed in all browsers, and importantly, it is known to be faulty in Internet Explorer. Exports and data integrity have also shown to be unreliable in Chrome.  
+If you do not have Firefox, you can download it [here.](http://www.mozilla.org/en-US/firefox/new/)  
+
 
 CRSD-ANT
 ======================
@@ -180,7 +205,7 @@ Variables
 
 
 Flow Diagram
-----------
+==========
 
 ### Technical Flow Diagram
 
