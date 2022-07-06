@@ -8,6 +8,7 @@ The origional documentation for the CRSD-ANT can be found [here.]()
 
 Installation
 ----------
+
 ### Download the source files
 
 Click on the "Zip" link in the sidebar above or simply click [here.](https://github.com/BatterySmooth/CRSD-ANT/archive/master.zip)
@@ -28,15 +29,15 @@ You can use a URL query to pre-populate some of the fields (ID, Session Number, 
 The index.html page will extract the values if they are present and pre-populate the main.html page with those values, marking the text boxes as read-only.
 If a value is not present in the URL query, then the input for that field will will not be pre-populated and will be editable.
 
-|	URL Param   |	Element Name	 | Values            |
-|-------------|----------------|-------------------|
-|ID           |ID              | String (any)      |
-|sessionNumber|Session #       | String (any)      |
-|studyID      |Study ID        | String (any)      |
-|groupID      |Group ID  			 | String (any)      |
-|age          |Age             | String (any)      |
-|firstTrial   |First Trial     | "ANT" or "Switch" |
-|round        |*N/A*           | *1* or *2*        |
+|	URL Param   |	Element Name	 | Values            | Purpose                                                 |
+|-------------|----------------|-------------------|---------------------------------------------------------|
+|ID           |ID              | String (any)      | Setting input parameters                                |
+|sessionNumber|Session #       | String (any)      | Setting input parameters                                |
+|studyID      |Study ID        | String (any)      | Setting input parameters                                |
+|groupID      |Group ID  			 | String (any)      | Setting input parameters                                |
+|age          |Age             | String (any)      | Setting input parameters                                |
+|firstTrial   |First Trial     | "ANT" or "Switch" | Selecting which trial to run first                      |
+|round        |*N/A*           | *1* or *2*        | To determine what message is shown on the export screen |
 
 **Important Note:** The CRSD-ANT program will run in any browser, but timing accuracy and result integrity is not guaranteed in all browsers, and importantly, it is known to be faulty in Internet Explorer. Exports and data integrity have also shown to be unreliable in Chrome.  
 If you do not have Firefox, you can download it [here.](http://www.mozilla.org/en-US/firefox/new/)  
@@ -57,39 +58,7 @@ This work is licensed under the Creative Commons Attribution-NonCommercial-Share
 Any original or modified version of this software must attribute the original work to the following (original) authors, and include a hyperlink (or at very least a URL reference) to their respective Web sites:
 
 - Luke Docksteader - http://docksteaderluke.com
-- Kris Scott - http://krssctt.com
-
-Installation
-------------
-### Download the source files
-Click on the "Zip" link in the sidebar above or simply click [here.](https://github.com/docksteaderluke/CRSD-ANT/archive/master.zip)
-
-### Extract the archive
-Extract the archive using the zip utility of your choice. Once the archive has been extracted a new folder named "CRSD-ANT" should now exist.
-
-### Running the CRSD-ANT software
-Inside of the newly created "CRSD-ANT" folder there should be a file named "index.html". Open this file with the Firefox Web browser and follow the on-screen instructions.
-
-You can use a URL query to pre-populate some of the fields (ID, Session Number, Study ID, Group ID, and Age). This is done in the following format, where '**×**' indicates a value:
-
-> index.html?ID=**×**&sessionNumber=**×**&studyID=**×**&groupID=**×**&age=**×**&firstTrial=**×**&round=**×**
-
-The index.html page will extract the values if they are present and pre-populate the main.html page with those values, marking the text boxes as read-only.
-If a value is not present in the URL query, then the input for that field will will not be pre-populated and will be editable.
-
-|	URL Param   |	Element Name	 | Values            |
-|-------------|----------------|-------------------|
-|ID           |ID              | String (any)      |
-|sessionNumber|Session #       | String (any)      |
-|studyID      |Study ID        | String (any)      |
-|groupID      |Group ID  			 | String (any)      |
-|age          |Age             | String (any)      |
-|firstTrial   |First Trial     | "ANT" or "Switch" |
-|round        |*N/A*           | *1* or *2*        |
-
-**Important Note:** The CRSD-ANT program will run in any browser, but timing accuracy is not guaranteed in 
-all browsers, and importantly, it is known to be faulty in Internet Explorer.
-If you do not have Firefox, you can download it [here.](http://www.mozilla.org/en-US/firefox/new/)  
+- Kris Scott - http://krssctt.com 
 
 Adding new stimulus images
 --------------------------

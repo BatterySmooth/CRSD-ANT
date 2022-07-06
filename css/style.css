@@ -211,3 +211,22 @@ input[readonly] {
 	background-color: #333334;
 	width: 80px;
 }
+
+/* Debreif page */
+.debreifButton {
+	width: 100px;
+  height: 50px;
+}
+#debreifBG {
+	background-color: rgb(151, 151, 151);
+}
+#debreif {
+	width: 750px;
+	margin: auto;
+	padding: 2em;
+	margin-top: 40px;
+	background-color: white;
+}
+.centered {
+	text-align: center;
+}
