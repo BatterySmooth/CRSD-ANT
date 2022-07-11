@@ -31,7 +31,7 @@ function createDownloadData(exportFilename,data,downloadLinkText) {
 //Generates the flash links and the textual new-window links from the data.
 function generateExportLink(data) {
 	setupData[8] = new Date();
-	fileName = 'CRSD-ANT - '+sessionStorage.getItem("ID")+' - '+(new Date().toISOString());
+	fileName = 'CRSD-ANT - '+sessionStorage.getItem("ID")+' - '+(new Date().toISOString())+' round '+sessionStorage.getItem("round");
 	
 	var csvData = generateData(setupData,data)
 

@@ -31,7 +31,7 @@ function createDownloadData(exportFilename,data,downloadLinkText) {
 //Generates the flash links and the textual new-window links from the data.
 function GenerateExportLink(data) {
 	ExportDate = new Date();
-	fileName = 'Switch - '+sessionStorage.getItem("ID")+' - '+(new Date().toISOString());
+	fileName = 'Switch - '+sessionStorage.getItem("ID")+' - '+(new Date().toISOString())+' round '+sessionStorage.getItem("round");
 	
 	let csvData = SwitchGenerateData(data);                         // SwitchGenerateResults.js
 
