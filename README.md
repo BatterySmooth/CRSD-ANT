@@ -99,7 +99,7 @@ Description of Data Files Saved by the CRSD-ANT.
 |CueType			  	|Numeric (1 = No Cue; 2 = Centre Cue; 3 = Double Cue; 4 = Spatial Cue)	|				      	              |
 |TargLoc			  	|String (UP or DOWN)									                                	|								              |
 |TargDirection		|String: L or R											                                  	|								              |
-|Congruency				|String: Congruent or Incongruent					                          		|								              |
+|Congruency				|String: congruent or incongruent					                          		|								              |
 |TrialStartTime		|Time at start of trial									                              	|								              |
 |targetOnTime			|Time at target onset									                                 	|								              |
 |firstFix			  	|Duration of first fixation (panel 1 in Fig 1)			                   	|								              |
